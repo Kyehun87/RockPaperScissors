@@ -12,10 +12,10 @@ function computerPlay() {
             break;
         case 3:
             return "scissors"
+            break;
     }
 }
 
-// console.log(computerPlay())
 
 //Create a function that takes two parameters (playerSelection and computerSelection) and return a string that declares the winner.
 // playerSelection should be case-insensitive
@@ -23,12 +23,71 @@ function computerPlay() {
 // Keeping the total score
 let playerTotal = 0;
 let computerTotal = 0;
+// document.getElementById("computerResult").innerHTML += computerTotal
+// document.getElementById("playerResult").innerHTML += playerTotal
+// computerResult.innerHTML = computerTotal
+// playerResult.innerHTML = playerTotal
+// playerSelection = window.prompt("Choose Rock, Paper or Scissors: ")
 
-function gamePlay(playerSelection, computerSelection) {
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+
+// Allows for user to make selection by clicking button
+function selection () {
+    rock.addEventListener("click", () => {
+        console.log("rock")
+        playerSelection = "rock"
+        computerSelection = computerPlay()
+        gamePlay(playerSelection, computerSelection) //This takes the user's choice and plays the game
+    })
+
+    paper.addEventListener("click", () => {
+        console.log("paper")
+        playerSelection = "paper"
+        computerSelection = computerPlay()
+        gamePlay(playerSelection, computerSelection)
+    })
+
+    scissors.addEventListener("click", () => {
+        console.log("scissors")
+        playerSelection = "scissors"
+        computerSelection = computerPlay()
+        gamePlay(playerSelection, computerSelection)
+    })
+
+}
+
+
+function gamePlay(playerSelection,computerSelection) {
     // Computer selection is using the random choice from the computer play function
-    computerSelection = computerPlay()
+    // computerSelection = computerPlay()
     // Prompts the user to pick rock, paper or scissors
-    playerSelection = window.prompt("Choose Rock, Paper or Scissors: ")
+    // playerSelection = window.prompt("Choose Rock, Paper or Scissors: ")
+    // playerSelection = selection()
+    // function selection () {
+    //     const rock = document.getElementById("rock")
+    //     const paper = document.getElementById("paper")
+    //     const scissors = document.getElementById("scissors")
+    
+    
+    //     rock.addEventListener("click", () => {
+    //         console.log("rock")
+    //         gamePlay("rock", computerPlay) //This takes the user's choice and plays the game
+    //     })
+    
+    //     paper.addEventListener("click", () => {
+    //         console.log("paper")
+    //         gamePlay("paper", computerPlay)
+    //     })
+    
+    //     scissors.addEventListener("click", () => {
+    //         console.log("scissors")
+    //         gamePlay("rock", computerPlay)
+    //     })
+    
+    // }
+
     // making the selection case insensitive
     playerSelection = playerSelection.toLowerCase()
     // Logic to go through the game
@@ -77,13 +136,14 @@ function gamePlay(playerSelection, computerSelection) {
 // Create a new function called game(). Call the playRound function inside that plays a 5 round game and keeps score. 
 
 function game() {
-    // plays the game 5 times
     for (let i = 0; i < 5; i++) {
-        // playerTotal = 0
-       gamePlay()
-        
-        // rockconsole.log(computerTotal)
+        document.getElementById("computerResult").innerHTML = computerTotal
+        document.getElementById("playerResult").innerHTML = playerTotal
+        // selection()
+        // gamePlay()
+        console.log(playerTotal)
     }
+    
     // Sums up the final scores
     if (playerTotal > computerTotal) {
         console.log(`You win with a score of ${playerTotal} - ${computerTotal}`)
@@ -95,3 +155,15 @@ function game() {
 }
 
 game()
+// selection()
+// gamePlay()
+
+// Removed Gameplay to run 5 times
+    // plays the game 5 times
+    // for (let i = 0; i < 5; i++) {
+        // playerTotal = 0
+        // gamePlay()
+        
+        // rockconsole.log(computerTotal)
+    
+
