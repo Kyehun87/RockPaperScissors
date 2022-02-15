@@ -1,5 +1,17 @@
 // console.log("Hello World")
 
+// Keeping the total score
+let playerTotal = 0;
+let computerTotal = 0;
+
+// Getting the button ids
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+
+// Keeps track of the number of rounds
+let round = 0
+
 // Create a function that will randomly return rock/paper/scissors called computerPlay
 function computerPlay() {
     // let computer = Math.floor(Math.random() * 3) + 1
@@ -16,81 +28,30 @@ function computerPlay() {
     }
 }
 
-
-//Create a function that takes two parameters (playerSelection and computerSelection) and return a string that declares the winner.
-// playerSelection should be case-insensitive
-
-// Keeping the total score
-let playerTotal = 0;
-let computerTotal = 0;
-// document.getElementById("computerResult").innerHTML += computerTotal
-// document.getElementById("playerResult").innerHTML += playerTotal
-// computerResult.innerHTML = computerTotal
-// playerResult.innerHTML = playerTotal
-// playerSelection = window.prompt("Choose Rock, Paper or Scissors: ")
-
-const rock = document.getElementById("rock")
-const paper = document.getElementById("paper")
-const scissors = document.getElementById("scissors")
-
 // Allows for user to make selection by clicking button
 function selection () {
     rock.addEventListener("click", () => {
-        console.log("rock")
-        playerSelection = "rock"
-        computerSelection = computerPlay()
-        gamePlay(playerSelection, computerSelection) //This takes the user's choice and plays the game
+        return gamePlay("rock", computerPlay()) //This takes the user's choice and plays the game
     })
 
     paper.addEventListener("click", () => {
-        console.log("paper")
-        playerSelection = "paper"
-        computerSelection = computerPlay()
-        gamePlay(playerSelection, computerSelection)
+        return gamePlay("paper", computerPlay())
     })
 
     scissors.addEventListener("click", () => {
-        console.log("scissors")
-        playerSelection = "scissors"
-        computerSelection = computerPlay()
-        gamePlay(playerSelection, computerSelection)
+        return gamePlay("scissors", computerPlay())
     })
 
 }
 
 
+//Create a function that takes two parameters (playerSelection and computerSelection) and return a string that declares the winner.
+// playerSelection should be case-insensitive
+
 function gamePlay(playerSelection,computerSelection) {
     // Computer selection is using the random choice from the computer play function
-    // computerSelection = computerPlay()
-    // Prompts the user to pick rock, paper or scissors
-    // playerSelection = window.prompt("Choose Rock, Paper or Scissors: ")
-    // playerSelection = selection()
-    // function selection () {
-    //     const rock = document.getElementById("rock")
-    //     const paper = document.getElementById("paper")
-    //     const scissors = document.getElementById("scissors")
-    
-    
-    //     rock.addEventListener("click", () => {
-    //         console.log("rock")
-    //         gamePlay("rock", computerPlay) //This takes the user's choice and plays the game
-    //     })
-    
-    //     paper.addEventListener("click", () => {
-    //         console.log("paper")
-    //         gamePlay("paper", computerPlay)
-    //     })
-    
-    //     scissors.addEventListener("click", () => {
-    //         console.log("scissors")
-    //         gamePlay("rock", computerPlay)
-    //     })
-    
-    // }
+    // Player selection is using the click funtion from selection()
 
-    // making the selection case insensitive
-    playerSelection = playerSelection.toLowerCase()
-    // Logic to go through the game
     if (playerSelection === "rock") {
         if (computerSelection === "paper") {
             computerTotal ++
@@ -129,22 +90,36 @@ function gamePlay(playerSelection,computerSelection) {
     // Logs out the totals after each game
     console.log (`Player Total: ${playerTotal}`)
     console.log (`Computer Total: ${computerTotal}`)
+    // Adds to the round count and then uses that total as a parameter in roundCount
+    round ++
+    roundCount(round)
 }
 
 // console.log(gamePlay())
 
-// Create a new function called game(). Call the playRound function inside that plays a 5 round game and keeps score. 
-
-function game() {
-    for (let i = 0; i < 5; i++) {
+function roundCount(round) {
+    if (round < 5) {
         document.getElementById("computerResult").innerHTML = computerTotal
         document.getElementById("playerResult").innerHTML = playerTotal
-        // selection()
-        // gamePlay()
-        console.log(playerTotal)
-    }
-    
-    // Sums up the final scores
+    } else {
+        console.log("done")
+}
+}
+
+function endGame() {
+
+    // rock.removeEventListener("click", () => {
+    //     return gamePlay("rock", computerPlay()) //This takes the user's choice and plays the game
+    // })
+
+    // paper.removeEventListener("click", () => {
+    //     return gamePlay("paper", computerPlay())
+    // })
+
+    // scissors.removeEventListener("click", () => {
+    //     return gamePlay("scissors", computerPlay())
+    // })
+
     if (playerTotal > computerTotal) {
         console.log(`You win with a score of ${playerTotal} - ${computerTotal}`)
     } else if (computerTotal > playerTotal) {
@@ -154,16 +129,37 @@ function game() {
     }
 }
 
+
+// Create a new function called game(). Call the playRound function inside that plays a 5 round game and keeps score. 
+
+function game() {
+
+    // document.getElementById("computerResult").innerHTML = computerTotal
+    // document.getElementById("playerResult").innerHTML = playerTotal
+    
+    selection()
+    endGame()
+
+    // if (round < 5) {
+    //     // selection()
+    //     console.log(round)
+    // } else {
+    //     console.log("done")
+    // }
+    
+    // Sums up the final scores
+//     if (playerTotal > computerTotal) {
+//         console.log(`You win with a score of ${playerTotal} - ${computerTotal}`)
+//     } else if (computerTotal > playerTotal) {
+//         console.log(`You lose with a score of ${computerTotal} - ${playerTotal}`)
+//     }else{
+//         console.log("It's a Tie!")
+//     }
+// }
+// }
+}
+
 game()
 // selection()
 // gamePlay()
-
-// Removed Gameplay to run 5 times
-    // plays the game 5 times
-    // for (let i = 0; i < 5; i++) {
-        // playerTotal = 0
-        // gamePlay()
-        
-        // rockconsole.log(computerTotal)
-    
 
