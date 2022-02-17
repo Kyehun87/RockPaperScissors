@@ -12,6 +12,9 @@ const scissors = document.getElementById("scissors")
 // Keeps track of the number of rounds
 let round = 0
 
+// Creating a place for the final score
+const final = document.getElementById("final")
+
 // Create a function that will randomly return rock/paper/scissors called computerPlay
 function computerPlay() {
     // let computer = Math.floor(Math.random() * 3) + 1
@@ -30,15 +33,15 @@ function computerPlay() {
 
 // Allows for user to make selection by clicking button
 function selection () {
-    rock.addEventListener("click", () => {
+    rock.addEventListener("click", rockClick = () => {
         return gamePlay("rock", computerPlay()) //This takes the user's choice and plays the game
     })
 
-    paper.addEventListener("click", () => {
+    paper.addEventListener("click", paperClick = () => {
         return gamePlay("paper", computerPlay())
     })
 
-    scissors.addEventListener("click", () => {
+    scissors.addEventListener("click", scissorsClick = () => {
         return gamePlay("scissors", computerPlay())
     })
 
@@ -99,33 +102,31 @@ function gamePlay(playerSelection,computerSelection) {
 
 function roundCount(round) {
     if (round < 5) {
+        // Displays win totals for each player up to a total of 5
         document.getElementById("computerResult").innerHTML = computerTotal
         document.getElementById("playerResult").innerHTML = playerTotal
     } else {
-        console.log("done")
+        document.getElementById("computerResult").innerHTML = computerTotal
+        document.getElementById("playerResult").innerHTML = playerTotal
+        // After 5 rounds it removes the abiilty for player to click the buttons
+        rock.removeEventListener("click", rockClick)
+    
+        paper.removeEventListener("click", paperClick)
+    
+        scissors.removeEventListener("click", scissorsClick)
+        // Moves to the final tally 
+        endGame()
 }
 }
 
 function endGame() {
-
-    // rock.removeEventListener("click", () => {
-    //     return gamePlay("rock", computerPlay()) //This takes the user's choice and plays the game
-    // })
-
-    // paper.removeEventListener("click", () => {
-    //     return gamePlay("paper", computerPlay())
-    // })
-
-    // scissors.removeEventListener("click", () => {
-    //     return gamePlay("scissors", computerPlay())
-    // })
-
+    // Totals up the score and then displays it on the screen
     if (playerTotal > computerTotal) {
-        console.log(`You win with a score of ${playerTotal} - ${computerTotal}`)
+        final.textContent = `You win with a score of ${playerTotal} - ${computerTotal}`
     } else if (computerTotal > playerTotal) {
-        console.log(`You lose with a score of ${computerTotal} - ${playerTotal}`)
-    }else{
-        console.log("It's a Tie!")
+        final.textContent =`You lose with a score of ${computerTotal} - ${playerTotal}`
+    }else if (playerTotal === computerTotal){
+        final.textContent = "It's a Tie!"
     }
 }
 
@@ -133,33 +134,8 @@ function endGame() {
 // Create a new function called game(). Call the playRound function inside that plays a 5 round game and keeps score. 
 
 function game() {
-
-    // document.getElementById("computerResult").innerHTML = computerTotal
-    // document.getElementById("playerResult").innerHTML = playerTotal
-    
+    // Now just calls the game. The round total is kept in the roundCount function
     selection()
-    endGame()
-
-    // if (round < 5) {
-    //     // selection()
-    //     console.log(round)
-    // } else {
-    //     console.log("done")
-    // }
-    
-    // Sums up the final scores
-//     if (playerTotal > computerTotal) {
-//         console.log(`You win with a score of ${playerTotal} - ${computerTotal}`)
-//     } else if (computerTotal > playerTotal) {
-//         console.log(`You lose with a score of ${computerTotal} - ${playerTotal}`)
-//     }else{
-//         console.log("It's a Tie!")
-//     }
-// }
-// }
 }
 
 game()
-// selection()
-// gamePlay()
-
